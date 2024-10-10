@@ -84,8 +84,6 @@ ggplot(music, aes(x = Band, y = Loudness, fill = as.factor(Loudness))) +
   )
 ```
 
-## Data Overview
-
 # Results {#sec-results}
 
 

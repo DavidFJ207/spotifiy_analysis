@@ -1,0 +1,71 @@
+---
+title: "Spotifiy Analysis"
+author: 
+  - Gadiel David Flores
+thanks: "Code and data are available at: https://github.com/DavidFJ207/spotifiy_analysis"
+date: today
+date-format: long
+abstract: "Using package spotifyr, this paper takes a look at interesting data"
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+
+# Introduction
+This paper includes a look at marriages from 2011 to 2024.
+We use @alexander2021, @R-base,@R-opendatatoronto, and @toronto-open-data.
+
+The remainder of this paper is structured as follows. @sec-data, @sec-results, @sec-discussion, and @sec-references
+
+
+# Data {#sec-data}
+Our data is of marriages in the span of 13 years (@fig-bills), from @toronto-open-data.
+
+```{r}
+#| label: fig-bills
+#| fig-cap: Bills of penguins
+#| echo: false
+library(tidyverse)
+library(here)
+library(lubridate)
+
+# Load the data
+cleaned_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
+
+# Ensure the date column is in Date format before extracting the year
+cleaned_data <- cleaned_data %>%
+  mutate(date = ymd(date)) %>%  # Convert to Date format if it's not already
+  mutate(year = year(date))  # Extract the year
+
+# Summarize data: Total number of licenses issued per year
+yearly_totals <- cleaned_data %>%
+  group_by(year) %>%
+  summarise(total_licenses = sum(licenses_issued, na.rm = TRUE))
+
+# Create the bar plot with year on the x-axis and total licenses on the y-axis
+ggplot(yearly_totals, aes(x = factor(year), y = total_licenses)) +
+  geom_bar(stat = "identity", alpha = 0.8, fill = "steelblue") +
+  theme_minimal() +  # Apply the minimal theme
+  labs(title = "Total Marriage Licenses Issued by Year",
+       x = "Year",
+       y = "Total Number of Licenses Issued")
+```
+
+# Results {#sec-results}
+
+Our results can be seen in @fig-bills
+
+# Discussion {#sec-discussion}
+
+## First discussion point {#sec-first-point}
+
+Our results show that there is a disturbance of marriage licenses during the pandemic. 
+
+
+\newpage
+
+# References {#sec-references}
+
+For data analysis, we used R [@R-base] and the `opendatatoronto` package [@R-opendatatoronto]. The data is available from the City of Toronto Open Data [@toronto-open-data], and the research structure is based on the starter repository by Rohan Alexander [@alexander2021].
+
+

@@ -126,12 +126,10 @@ ggplot(music, aes(x = Band, y = Danceability, fill = as.factor(Danceability))) +
   )
 ```
 
-# Discussion {#sec-discussion}
-
 ## Trends {#sec-trends}
 As bands get louder and the e
 ## Implications {#sec-implications}
-
+The data highlights subtle but meaningful differences in the musical styles of Coldplay, Radiohead, and The National. **Coldplay**’s higher energy and loudness suggest a more mainstream, dynamic appeal, consistent with their stadium-filling sound and pop-rock influence. **Radiohead**'s lower energy and loudness reflect their more introspective, experimental approach, often favoring atmospheric, complex compositions over immediacy. **The National**'s higher danceability, combined with moderate energy and lower loudness, suggests a smoother, emotionally resonant style, balancing accessibility with depth. These variations imply how each band resonates with their respective audiences, shaping listener experiences through distinct blends of energy, mood, and engagement.
 # References {#sec-references}
 
 For data analysis, we used R [@R-base] and the `spotifyr` package [@spotifyr]. The data was obtained through the Spotify API [@spotify-api], and the analysis follows standard practices in music data analysis [@music-data-analysis].

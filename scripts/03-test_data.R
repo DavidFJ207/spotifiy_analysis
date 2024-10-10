@@ -10,7 +10,7 @@
 #### Workspace setup ####
 library(tidyverse)
 library(testthat)
-p
+
 # Load the data
 data <- read_csv("data/analysis_data/analysis_data.csv")
 

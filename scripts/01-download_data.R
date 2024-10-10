@@ -1,26 +1,41 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from Toronto Open Data
+# Purpose: Downloads and saves the data from Spotify database
 # Author: Gadiel David Flores
 # Date: 19 September, 2024
 # Contact: davidgadiel.flores@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: None
-# Any other information needed? None
+# Pre-requisites: Spotify API credentials stored in .Renviron file
 
 #### Workspace setup ####
-library(opendatatoronto)
+library(spotifyr)
 library(tidyverse)
+
+# Authenticate using Spotify API credentials stored in .Renviron
+Sys.getenv("SPOTIFY_CLIENT_ID")
+Sys.getenv("SPOTIFY_CLIENT_SECRET")
 
 #### Download data ####
 
-# Get package
-package <- show_package("e28bc818-43d5-43f7-b5d9-bdfb4eda5feb")
-package
-resources <- list_package_resources("e28bc818-43d5-43f7-b5d9-bdfb4eda5feb")
-datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))
-data <- filter(datastore_resources, row_number() == 1) %>% get_resource()
+# Download data
+radiohead_data <- get_artist_audio_features('radiohead')
+the_national_data <- get_artist_audio_features('the national')
+coldplay_data <- get_artist_audio_features('coldplay')
+
+# Ensure 'track_preview_url' exists and rename it to 'preview_link'
+if ("track_preview_url" %in% colnames(radiohead_data)) {
+  radiohead_data <- dplyr::rename(radiohead_data, preview_link = track_preview_url)
+}
+if ("track_preview_url" %in% colnames(the_national_data)) {
+  the_national_data <- dplyr::rename(the_national_data, preview_link = track_preview_url)
+}
+if ("track_preview_url" %in% colnames(coldplay_data)) {
+  coldplay_data <- dplyr::rename(coldplay_data, preview_link = track_preview_url)
+}
 
 #### Save data ####
-write_csv(data, "data/raw_data/raw_data.csv")
 
-         
+# Save the data
+write_csv(radiohead_data, "data/raw_data/raw_data_radiohead.csv")
+write_csv(the_national_data, "data/raw_data/raw_data_the_national.csv")
+write_csv(coldplay_data, "data/raw_data/raw_data_coldplay.csv")
+

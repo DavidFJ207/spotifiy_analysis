@@ -12,6 +12,3 @@ The data includes various audio features such as track name, duration, energy, d
 ## Files and Directories
 - `data/raw_data/raw_data_coldplay.csv`: Contains the audio features for Coldplay tracks.
 - `R/spotify_data_download.R`: The R script used to download the data from the Spotify API, rename columns, and save them as CSV files.
-
-
-

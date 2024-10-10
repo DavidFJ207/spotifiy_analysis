@@ -5,7 +5,7 @@ This paper provides an analysis of music using the Spotify API. In this analysis
 
 ## Description
 This repository contains R scripts used to download audio feature data from Spotify for the following artists:
-**Coldplay**,**Radiohead**,**The National**
+**Coldplay**,**Radiohead**, and **The National**
 
 The data includes various audio features such as track name, duration, energy, danceability, and loudness.
 

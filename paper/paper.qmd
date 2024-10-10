@@ -1,11 +1,12 @@
 ---
 title: "Spotify Data Analysis"
+subtitle: "Comparison of Audio Features Between Multiple Artists"
 author: 
-  - Gadiel David Flores
+  - Gadiel David Flores, Tina Kim, Dannie Dai Dai, Yanfei Huang, Manjun Zhu
 thanks: "Code and data are available at: https://github.com/DavidFJ207/spotify_analysis"
 date: today
 date-format: long
-abstract: "Using the `spotifyr` package, this paper analyzes audio data"
+abstract: "Using the `spotifyr` package, this paper analyzes audio data features `danceability`, `energy`, and `loudness` by comparing between three artists, `Coldplay`, `Radiohead`, and `The National`"
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -15,7 +16,7 @@ bibliography: references.bib
 This paper provides an analysis of music using the Spotify API
 
 # Data {#sec-data}
-For each artist, audio features of their tracks were downloaded, including `danceability`, `energy`, `valence`, and track duration.
+For each artist, audio features of their tracks were downloaded, including `danceability`, `energy`, and `loudness`.
 
 ```{r}
 #| label: fig-data-summary

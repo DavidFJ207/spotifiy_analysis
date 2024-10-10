@@ -28,7 +28,7 @@ music_data <-
 
 # Introduction
 <<<<<<< HEAD
-This paper provides an analysis of music using the Spotify API. In this analysis, we examine three singers: Coldplay, Radiohead and The National. By utilizing Spotify’s extensive database of music and the Spotify API, we analysis three key audio features: Energy, danceability and loudness, which provide quantitative insights into the musical characteristics of each band. Overall, 
+This paper provides an analysis of music using the Spotify API. In this analysis, we examine three singers: Coldplay, Radiohead and The National. By utilizing Spotify’s extensive database of music and the Spotify API, we analysis three key audio features: Energy, danceability and loudness, which provide quantitative insights into the musical characteristics of each band. Coldplay, Radiohead, and The National differ slightly in musical style: The National shows higher danceability, while Coldplay has greater energy and loudness than Radiohead.  
 
 # Data {#sec-data}
 For each artist, audio features of their tracks were downloaded, including `danceability`, `energy`, and `loudness`.

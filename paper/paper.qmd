@@ -113,8 +113,25 @@ ggplot(music, aes(x = Band, y = Danceability, fill = as.factor(Danceability))) +
   )
 ```
 
-## Trends {#sec-trends}
-As bands get louder and the e
+
+## Trends {#sec-trends} 
+As band's loudness increases and their energy decreases, we see that the overall danceability increases. 
+
+```{r} 
+#| label: fig-danceability 
+#| fig-cap: Average Danceability for Coldplay, Radiohead, and The National 
+#| echo: false #| warning: false 
+#| message: false 
+# Load necessary libraries 
+library(ggplot2) library(here) library(dplyr) 
+# Load the data 
+music <- read.csv(here::here("data/analysis_data/music_data.csv")) 
+# bar plot Danceability 
+ggplot(music, aes(x = Loudness, y = Danceability)) + geom_point(color = "black", alpha = 0.6) + geom_smooth(method = "lm", se = FALSE, color = "red", formula = y ~ x) +   scale_x_continuous(labels = scales::comma) + labs(title = "Daceability vs Loudness", x = "Loudness", y = "Danceability") + theme_minimal() 
+# bar plot Energy 
+ggplot(music, aes(x = Energy, y = Danceability)) + geom_point(color = "black", alpha = 0.6) + geom_smooth(method = "lm", se = FALSE, color = "red", formula = y ~ x) + scale_x_continuous(labels = scales::comma) + labs(title = "Daceability vs Energy", x = "Energy", y = "Danceability") + theme_minimal()
+```
+
 ## Implications {#sec-implications}
 The data highlights subtle but meaningful differences in the musical styles of Coldplay, Radiohead, and The National. **Coldplay**’s higher energy and loudness suggest a more mainstream, dynamic appeal, consistent with their stadium-filling sound and pop-rock influence. **Radiohead**'s lower energy and loudness reflect their more introspective, experimental approach, often favoring atmospheric, complex compositions over immediacy. **The National**'s higher danceability, combined with moderate energy and lower loudness, suggests a smoother, emotionally resonant style, balancing accessibility with depth. These variations imply how each band resonates with their respective audiences, shaping listener experiences through distinct blends of energy, mood, and engagement.
 # References {#sec-references}

@@ -1,3 +1,4 @@
+~%2F.Renviron="AA51204D"
 ~%2Fmarriage_licenses_to%2F.gitignore="C16557F4"
 ~%2Fmarriage_licenses_to%2FREADME.md="11396231"
 ~%2Fmarriage_licenses_to%2Fdata%2Fanalysis_data%2Fanalysis_data.csv="765512CF"
@@ -10,6 +11,8 @@
 ~%2Fmarriage_licenses_to%2Fscripts%2F01-download_data.R="83D0FCF8"
 ~%2Fmarriage_licenses_to%2Fscripts%2F02-data_cleaning.R="45D2E2CE"
 ~%2Fmarriage_licenses_to%2Fscripts%2F03-test_data.R="CC110B55"
+~%2Fspotifiy_analysis%2F.Renviron="D1BB12C5"
+~%2Fspotifiy_analysis%2F.Rhistory="BFF039A1"
 ~%2Fspotifiy_analysis%2FREADME.md="9FA01C17"
 ~%2Fspotifiy_analysis%2Fpaper%2Fpaper.qmd="342505BD"
 ~%2Fspotifiy_analysis%2Fpaper%2Freferences.bib="F477DCD6"

@@ -101,11 +101,45 @@ ggplot(music, aes(x = Band, y = Danceability, fill = as.factor(Danceability))) +
 ```
 
 
-## Trends {#sec-trends} 
-As band's loudness increases and their energy decreases, we see that the overall danceability increases. 
+## Trends {#sec-trends}
+As shown in  @fig-danceability1-1 , there is a clear relationship between a band's loudness, energy, and danceability. Songs with higher loudness tend to have greater danceability, as indicated by the positive trend in the first scatter plot's line of best fit. Conversely, the second plot reveals that tracks with lower energy are also more danceable. These visual trends confirm that increasing loudness and decreasing energy are both associated with higher danceability in a band's music.
+
+```{r}
+#| label: fig-danceability1
+#| fig-cap: Danceability Correlation
+#| echo: false
+#| warning: false
+#| message: false
+
+# Load necessary libraries
+library(ggplot2)
+library(here)
+library(dplyr)
+
+# Load the data
+music <- read.csv(here::here("data/analysis_data/music_data.csv"))
+
+# Scatter plot: Danceability vs Loudness
+ggplot(music, aes(x = Loudness, y = Danceability)) + 
+  geom_point(color = "black", alpha = 0.6) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red", formula = y ~ x) +  # Add line of best fit
+  scale_x_continuous(labels = scales::comma) + 
+  labs(title = "Danceability vs Loudness", x = "Loudness", y = "Danceability") + 
+  theme_minimal()
+
+# Scatter plot: Danceability vs Energy
+ggplot(music, aes(x = Energy, y = Danceability)) + 
+  geom_point(color = "black", alpha = 0.6) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red", formula = y ~ x) +  # Add line of best fit
+  scale_x_continuous(labels = scales::comma) + 
+  labs(title = "Danceability vs Energy", x = "Energy", y = "Danceability") + 
+  theme_minimal()
+```
+
+\newpage  
 
 ## Implications {#sec-implications}
-The data highlights subtle but meaningful differences in the musical styles of Coldplay, Radiohead, and The National. **Coldplay**’s higher energy and loudness suggest a more mainstream, dynamic appeal, consistent with their stadium-filling sound and pop-rock influence. **Radiohead**'s lower energy and loudness reflect their more introspective, experimental approach, often favoring atmospheric, complex compositions over immediacy. **The National**'s higher danceability, combined with moderate energy and lower loudness, suggests a smoother, emotionally resonant style, balancing accessibility with depth. These variations imply how each band resonates with their respective audiences, shaping listener experiences through distinct blends of energy, mood, and engagement.
+While Spotify’s data doesn’t explicitly reveal how metrics like danceability are measured, we can infer that factors such as loudness and energy contribute to this metric. As shown in @fig-danceability, bands like Coldplay with higher energy and loudness tend to align with a more mainstream, dynamic sound, which could contribute to a higher perceived danceability. Radiohead, with lower energy and loudness, may favor more introspective and atmospheric compositions, which might explain a lower danceability score. The National’s combination of moderate energy, lower loudness, and higher danceability suggests that other subtler factors, like rhythm or emotional resonance, could play a role. These patterns imply that metrics like energy and loudness might be indirectly influencing danceability, shaping the overall listening experience in ways we can interpret but not fully quantify.
 
 # References {#sec-references}
 

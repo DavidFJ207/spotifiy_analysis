@@ -6,17 +6,43 @@ author:
 thanks: "Code and data are available at: https://github.com/DavidFJ207/spotify_analysis"
 date: today
 date-format: long
-abstract: "Using the `spotifyr` package, this paper analyzes audio data features `danceability`, `energy`, and `loudness` by comparing between three artists, `Coldplay`, `Radiohead`, and `The National`"
+abstract: "Using the `spotifyr` package, this paper analyzes audio data features `danceability`, `energy`, and `loudness` by comparing between three artists, `Coldplay`, `Radiohead`, and `The National`."
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(knitr)
+
+# Call the cleaned data
+music_data <- 
+  read_csv(file = here::here("data/analysis_data/music_data.csv"), 
+           show_col_types = FALSE)
+
+```
 
 # Introduction
 This paper provides an analysis of music using the Spotify API
 
 # Data {#sec-data}
 For each artist, audio features of their tracks were downloaded, including `danceability`, `energy`, and `loudness`.
+
+```{r}
+#| label: tbl-1
+#| tbl-cap: Table of the cleaned dataset
+#| echo: false
+
+head(music_data, 3) |>
+  kable(
+    col.names = c("Band", "Danceability", "Energy", "Loudness"),
+  booktabs = TRUE
+  )
+```
 
 ```{r}
 #| label: fig-data-summary

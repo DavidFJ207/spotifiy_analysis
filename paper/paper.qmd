@@ -45,20 +45,7 @@ ggplot(music, aes(x = Band, y = Energy, fill = as.factor(Energy))) +
     plot.title = element_text(hjust = 0.5),  
     legend.position = "top"  
   )
-# bar plot Danceability
-ggplot(music, aes(x = Band, y = Danceability, fill = as.factor(Danceability))) +
-  geom_bar(stat = "identity", position = "dodge") +  
-  labs(title = "Danceability",
-       x = "Band",
-       y = "Danceability",
-       fill = "Band") + 
-  theme_minimal() +  
-  scale_fill_grey(start = 0.8, end = 0.2) +  
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),  
-    plot.title = element_text(hjust = 0.5),  
-    legend.position = "top"  
-  )
+
 # bar plot Loudness
 ggplot(music, aes(x = Band, y = Loudness, fill = as.factor(Loudness))) +
   geom_bar(stat = "identity", position = "dodge") +  
@@ -87,6 +74,28 @@ ggplot(music, aes(x = Band, y = Loudness, fill = as.factor(Loudness))) +
 #| warning: false
 #| message: false
 
+# Load necessary libraries
+library(ggplot2)
+library(here)
+library(dplyr)
+
+# Load the data 
+music <- read.csv(here::here("data/analysis_data/music_data.csv"))
+
+# bar plot Danceability
+ggplot(music, aes(x = Band, y = Danceability, fill = as.factor(Danceability))) +
+  geom_bar(stat = "identity", position = "dodge") +  
+  labs(title = "Danceability",
+       x = "Band",
+       y = "Danceability",
+       fill = "Band") + 
+  theme_minimal() +  
+  scale_fill_grey(start = 0.8, end = 0.2) +  
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  
+    plot.title = element_text(hjust = 0.5),  
+    legend.position = "top"  
+  )
 ```
 
 # Discussion {#sec-discussion}

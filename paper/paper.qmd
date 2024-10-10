@@ -102,7 +102,7 @@ ggplot(music, aes(x = Band, y = Danceability, fill = as.factor(Danceability))) +
 # Discussion {#sec-discussion}
 
 ## Trends {#sec-trends}
-
+As bands get louder and the e
 ## Implications {#sec-implications}
 
 # References {#sec-references}

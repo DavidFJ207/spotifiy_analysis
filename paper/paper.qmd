@@ -1,21 +1,52 @@
 ---
 title: "Spotify Data Analysis"
+subtitle: "Comparison of Audio Features Between Multiple Artists"
 author: 
-  - Gadiel David Flores
+  - Gadiel David Flores, Tina Kim, Dannie Dai Dai, Yanfei Huang, Manjun Zhu
 thanks: "Code and data are available at: https://github.com/DavidFJ207/spotify_analysis"
 date: today
 date-format: long
-abstract: "Using the `spotifyr` package, this paper analyzes audio data"
+abstract: "Using the `spotifyr` package, this paper analyzes audio data features `danceability`, `energy`, and `loudness` by comparing between three artists, `Coldplay`, `Radiohead`, and `The National`."
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(knitr)
+
+# Call the cleaned data
+music_data <- 
+  read_csv(file = here::here("data/analysis_data/music_data.csv"), 
+           show_col_types = FALSE)
+
+```
 
 # Introduction
+<<<<<<< HEAD
 This paper provides an analysis of music using the Spotify API. In this analysis, we examine three singers: Coldplay, Radiohead and The National. By utilizing Spotify’s extensive database of music and the Spotify API, we analysis three key audio features: Energy, danceability and loudness, which provide quantitative insights into the musical characteristics of each band. Overall, 
+=======
+This paper provides an analysis of music using the Spotify API. In this analysis, we examine three singers: Coldplay, Radiohead and The National. By utilizing Spotify’s extensive database of music and the Spotify API, we analysis three key audio features: Energy, danceability and loudness, which provide quantitative insights into the musical characteristics of each band. 
+>>>>>>> 658f408dc053c683cf5aebf7d994d763b4cae111
 
 # Data {#sec-data}
-For each artist, audio features of their tracks were downloaded, including `danceability`, `energy`, `valence`, and track duration.
+For each artist, audio features of their tracks were downloaded, including `danceability`, `energy`, and `loudness`.
+
+```{r}
+#| label: tbl-1
+#| tbl-cap: Table of the cleaned dataset
+#| echo: false
+
+head(music_data, 3) |>
+  kable(
+    col.names = c("Band", "Danceability", "Energy", "Loudness"),
+  booktabs = TRUE
+  )
+```
 
 ```{r}
 #| label: fig-data-summary
@@ -31,12 +62,27 @@ library(dplyr)
 
 # Load the data 
 music <- read.csv(here::here("data/analysis_data/music_data.csv"))
-# bar plot
+# bar plot Energy
 ggplot(music, aes(x = Band, y = Energy, fill = as.factor(Energy))) +
   geom_bar(stat = "identity", position = "dodge") +  
   labs(title = "Energy",
        x = "Band",
        y = "Energy",
+       fill = "Band") + 
+  theme_minimal() +  
+  scale_fill_grey(start = 0.8, end = 0.2) +  
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  
+    plot.title = element_text(hjust = 0.5),  
+    legend.position = "top"  
+  )
+
+# bar plot Loudness
+ggplot(music, aes(x = Band, y = Loudness, fill = as.factor(Loudness))) +
+  geom_bar(stat = "identity", position = "dodge") +  
+  labs(title = "Loudness",
+       x = "Band",
+       y = "Loudness",
        fill = "Band") + 
   theme_minimal() +  
   scale_fill_grey(start = 0.8, end = 0.2) +  
@@ -59,12 +105,34 @@ ggplot(music, aes(x = Band, y = Energy, fill = as.factor(Energy))) +
 #| warning: false
 #| message: false
 
+# Load necessary libraries
+library(ggplot2)
+library(here)
+library(dplyr)
+
+# Load the data 
+music <- read.csv(here::here("data/analysis_data/music_data.csv"))
+
+# bar plot Danceability
+ggplot(music, aes(x = Band, y = Danceability, fill = as.factor(Danceability))) +
+  geom_bar(stat = "identity", position = "dodge") +  
+  labs(title = "Danceability",
+       x = "Band",
+       y = "Danceability",
+       fill = "Band") + 
+  theme_minimal() +  
+  scale_fill_grey(start = 0.8, end = 0.2) +  
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  
+    plot.title = element_text(hjust = 0.5),  
+    legend.position = "top"  
+  )
 ```
 
 # Discussion {#sec-discussion}
 
 ## Trends {#sec-trends}
-
+As bands get louder and the e
 ## Implications {#sec-implications}
 
 # References {#sec-references}

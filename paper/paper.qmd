@@ -17,7 +17,6 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(knitr)
 
 # Call the cleaned data
 music_data <- 
@@ -51,11 +50,6 @@ head(music_data, 3) |>
 #| echo: false
 #| warning: false
 #| message: false
-
-# Load necessary libraries
-library(ggplot2)
-library(here)
-library(dplyr)
 
 # Load the data 
 music <- read.csv(here::here("data/analysis_data/music_data.csv"))
@@ -101,11 +95,6 @@ ggplot(music, aes(x = Band, y = Loudness, fill = as.factor(Loudness))) +
 #| echo: false
 #| warning: false
 #| message: false
-
-# Load necessary libraries
-library(ggplot2)
-library(here)
-library(dplyr)
 
 # Load the data 
 music <- read.csv(here::here("data/analysis_data/music_data.csv"))

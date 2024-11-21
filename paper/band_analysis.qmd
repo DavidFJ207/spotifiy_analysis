@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: https://github.com/DavidFJ207/spotify_analysis"
 date: today
 date-format: long
-abstract: "Using the `spotifyr` package, this paper analyzes audio data features `danceability`, `energy`, and `loudness` by comparing between three artists, `Coldplay`, `Radiohead`, and `The National`."
+abstract: "Using the spotifyr package, this paper analyzes key audio features—danceability, energy, and loudness—of tracks from three artists: Coldplay, Radiohead, and The National. By comparing these features across the artists, we aim to identify patterns and trends in their music. Our results show that Coldplay’s tracks tend to have the highest energy and loudness, while The National's tracks display a moderate balance between energy and loudness with higher danceability scores. Radiohead's tracks, conversely, exhibit lower energy and loudness, correlating with lower danceability. These findings highlight the influence of loudness and energy on the danceability of music, with higher loudness and lower energy being associated with higher danceability. Visualizations confirm these trends, providing a deeper understanding of how these musical characteristics differentiate the artists."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -26,14 +26,20 @@ music_data <-
 ```
 
 # Introduction
-This paper provides an analysis of music using the Spotify API [@spotify-api]. In this analysis, we examine three singers: Coldplay, Radiohead and The National. By utilizing Spotify’s extensive database of music and the Spotify API, we analysis three key audio features: Energy, danceability and loudness, which provide quantitative insights into the musical characteristics of each band. Coldplay, Radiohead, and The National differ slightly in musical style: The National shows higher danceability, while Coldplay has greater energy and loudness than Radiohead.  
+Music analysis has increasingly utilized data-driven approaches to uncover patterns and differences in musical styles. With the vast amount of data available from streaming services like Spotify, artists' music can be analyzed on multiple dimensions, including audio features such as danceability, energy, and loudness. These features, which are calculated using machine learning models, provide a unique insight into the characteristics of music, helping to differentiate between various artists, genres, and tracks.
+
+In this study, we analyze the music of three popular artists—Coldplay, Radiohead, and The National—by comparing their tracks' danceability, energy, and loudness. These features are crucial for understanding how music resonates with listeners, influences listener behavior, and contributes to the overall listening experience. This paper provides an analysis of music using the Spotify API [@spotify-api]. For data analysis, we used R [@R-base], the tidyverse library [@tidyverse], and the `spotifyr` package [@spotifyr]. We collect audio data from the Spotify API for these three bands, which represent different musical styles and genres.
+
+The goal of this analysis is to explore trends in how these audio features are distributed across the artists' tracks and identify any significant differences or patterns. Specifically, we aim to determine whether higher energy and loudness correspond to greater danceability in a band's music, or if other factors are at play. This comparison will provide valuable insights into how these three bands approach music production and how their respective audio characteristics can be quantified and compared.
+
+The remainder of this paper is structured as follows: @sec-data details the data; @sec-results provides results like trends, and @sec-discussion discusses implications and limitations.
 
 # Data {#sec-data}
 For each artist, audio features of their tracks were downloaded from Spotify API [@spotify-api], including `danceability`, `energy`, and `loudness`. `Danceability` refers to how suitable the audio is for dancing using elements sush as tempo, rhythm, and beat strength. A value of 0.0 is least danceable and 1.0 is most danceable. `Energy` takes into account dynamic range, perceived loudness, timbre, onset rate, and general entropy on a scale of 0.0 to 0.1 where energetic tracks feel fast, loud, and noisy. `Loudness` refers to overall loudness of a track in decibels (dB) typically between -60 and 0 db.
 
 ```{r}
-#| label: fig-data-summary
-#| fig-cap: Data summary of audio features for Coldplay
+#| label: fig-energy
+#| fig-cap: "Average Energy for Coldplay, Radiohead, and The National"
 #| echo: false
 #| warning: false
 #| message: false
@@ -54,7 +60,17 @@ ggplot(music, aes(x = Band, y = Energy, fill = as.factor(Energy))) +
     plot.title = element_text(hjust = 0.5),  
     legend.position = "top"  
   )
+```
 
+```{r}
+#| label: fig-loudness
+#| fig-cap: "Average Loudness for Coldplay, Radiohead, and The National"
+#| echo: false
+#| warning: false
+#| message: false
+
+# Load the data 
+music <- read.csv(here::here("data/analysis_data/music_data.csv"))
 # bar plot Loudness
 ggplot(music, aes(x = Band, y = Loudness, fill = as.factor(Loudness))) +
   geom_bar(stat = "identity", position = "dodge") +  
@@ -73,10 +89,9 @@ ggplot(music, aes(x = Band, y = Loudness, fill = as.factor(Loudness))) +
 
 # Results {#sec-results}
 
-
 ```{r}
 #| label: fig-danceability
-#| fig-cap: Average Danceability for Coldplay, Radiohead, and The National
+#| fig-cap: "Average Danceability for Coldplay, Radiohead, and The National"
 #| echo: false
 #| warning: false
 #| message: false
@@ -106,7 +121,7 @@ As shown in  @fig-danceability1-1 , there is a clear relationship between a band
 
 ```{r}
 #| label: fig-danceability1
-#| fig-cap: Danceability Correlation
+#| fig-cap: "Danceability Correlation"
 #| echo: false
 #| warning: false
 #| message: false
@@ -122,25 +137,24 @@ music <- read.csv(here::here("data/analysis_data/music_data.csv"))
 # Scatter plot: Danceability vs Loudness
 ggplot(music, aes(x = Loudness, y = Danceability)) + 
   geom_point(color = "black", alpha = 0.6) + 
-  geom_smooth(method = "lm", se = FALSE, color = "red", formula = y ~ x) +  # Add line of best fit
-  scale_x_continuous(labels = scales::comma) + 
   labs(title = "Danceability vs Loudness", x = "Loudness", y = "Danceability") + 
   theme_minimal()
 
 # Scatter plot: Danceability vs Energy
 ggplot(music, aes(x = Energy, y = Danceability)) + 
   geom_point(color = "black", alpha = 0.6) + 
-  geom_smooth(method = "lm", se = FALSE, color = "red", formula = y ~ x) +  # Add line of best fit
-  scale_x_continuous(labels = scales::comma) + 
   labs(title = "Danceability vs Energy", x = "Energy", y = "Danceability") + 
   theme_minimal()
 ```
 
 \newpage  
 
-## Implications {#sec-implications}
+# Discussion {#sec-discussion}
+
+## Implications
 While Spotify’s data doesn’t explicitly reveal how metrics like danceability are measured, we can infer that factors such as loudness and energy contribute to this metric. As shown in @fig-danceability, bands like Coldplay with higher energy and loudness tend to align with a more mainstream, dynamic sound, which could contribute to a higher perceived danceability. Radiohead, with lower energy and loudness, may favor more introspective and atmospheric compositions, which might explain a lower danceability score. The National’s combination of moderate energy, lower loudness, and higher danceability suggests that other subtler factors, like rhythm or emotional resonance, could play a role. These patterns imply that metrics like energy and loudness might be indirectly influencing danceability, shaping the overall listening experience in ways we can interpret but not fully quantify.
 
-# References {#sec-references}
+## Limitations
+One of the primary limitations of this analysis is the small sample size, consisting of only three artists: Coldplay, Radiohead, and The National. With such a limited dataset, the results may not be generalizable to other artists or genres of music. The small number of data points restricts the ability to draw statistically significant conclusions or to account for the diversity of musical styles that exist across a broader range of artists. Moreover, this sample does not account for potential confounding factors, such as subgenres within rock music, that could influence the audio features of interest (danceability, energy, and loudness). Future research with a larger, more diverse set of artists would provide a more comprehensive understanding of how these audio features vary across different musical genres and styles.
 
-For data analysis, we used R [@R-base], [@tidyverse], and the `spotifyr` package [@spotifyr]. The data was obtained through the Spotify API [@spotify-api], and the starter folder was retrieved from a github reposository [@alexander2021].
+# References {#sec-references}
